@@ -1,0 +1,9 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: user-service
+  nacos:
+    discovery:
+      server-addr: http://localhost:8848
