@@ -7,3 +7,29 @@ spring:
   nacos:
     discovery:
       server-addr: http://localhost:8848
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: localhost:9876
+      bindings:
+        output:
+          destination: user-register-topic
+          group: user-group
+        input:
+          destination: user-register-topic
+          group: user-group
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/xshop?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driverClassName: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 10000
+      connection-test-query: SELECT 1

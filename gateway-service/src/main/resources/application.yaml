@@ -36,6 +36,12 @@ spring:
             - Path=/order/**
           filters:
             - StripPrefix=1
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
     sentinel:
       transport:
         dashboard: localhost:8858
