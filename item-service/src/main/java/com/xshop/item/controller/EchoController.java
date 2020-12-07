@@ -1,5 +1,6 @@
 package com.xshop.item.controller;
 
+import com.xshop.item.clients.NetClient;
 import com.xshop.item.mq.Sender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +14,18 @@ public class EchoController {
     @Autowired
     private Sender sender;
 
+    @Autowired
+    private NetClient netClient;
+
     @GetMapping("/hi")
     public String hi() {
         return "hi, i'm item service";
+    }
+
+
+    @GetMapping("/net/hi")
+    public Object netHi() {
+        return netClient.weatherforecast();
     }
 
     @GetMapping("/rabbit")
