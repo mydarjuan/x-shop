@@ -1,15 +1,19 @@
 package xshop.bc.service.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import xshop.bc.service.client.PaymentClient;
 
+@RefreshScope
 @RestController
+@RequestMapping("/echo")
 public class EchoController {
 
     @Autowired
@@ -20,6 +24,12 @@ public class EchoController {
 
     @Autowired
     private PaymentClient paymentClient;
+
+    @Value("${welcom.value}")
+    private String welcomValue;
+
+    @Value("${server.port}")
+    private String port;
 
     /**
      * 获取所有服务
@@ -52,5 +62,10 @@ public class EchoController {
     @RequestMapping("/call2")
     public String call2() {
         return paymentClient.getConsulHello();
+    }
+
+    @RequestMapping("/call3")
+    public String call3() {
+        return welcomValue + " i'm from site port:" + port;
     }
 }

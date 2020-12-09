@@ -1,0 +1,16 @@
+server:
+  port: 8503
+spring:
+  application:
+    name: bc-service
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      config:
+        enabled: true
+        watch:
+          enabled: true
+        prefix: config
+        defaultContext: ${spring.application.name}
+        format: YAML
